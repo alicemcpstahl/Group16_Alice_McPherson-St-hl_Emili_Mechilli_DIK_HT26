@@ -1,0 +1,429 @@
+/* FONTS */
+@font-face {
+    font-family: "oswald";
+    src: url(fonts/Oswald-Regular.ttf);
+}
+
+.Oswald-Regular.ttf {
+    font-family: "oswald", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "monserrat";
+    src: url(fonts/Montserrat-Regular.ttf);
+}
+
+.Montserrat-Regular.ttf {
+    font-family: "monserrat", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* BASICS */
+h1 {
+    font-family: 'oswald', system-ui;
+    font-size: 3rem;
+    letter-spacing: 0.1rem;
+    color: #121fcf;
+    background-image: linear-gradient(to right, #8a79b7 0%, #8ec55e, #1989d8, #c61f72 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+}
+
+h2 {
+    font-family: 'oswald', system-ui;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    color: #1989d8;
+}
+
+p {
+    font-family: 'monserrat', system-ui;
+}
+
+/* COLOURS */
+/* 
+yellow=#ffde59,
+pink=#ff70ba
+purple=#8a79b7
+blue=#1989d8 
+green=#8ec55e
+dark pink=#c61f72
+orange=#ffad85
+*/
+
+/* PAGE */
+body {
+    background: #EEAECA;
+    background: radial-gradient(circle, #ffde59 0%, #ff70ba 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    /* NEW */
+    min-height: 100vh;
+    /* NEW */
+}
+
+/* the canvas is a full-screen background layer, so the controls stay visible on top */
+#generativeCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#generativeCanvas canvas {
+    display: block;
+}
+
+/*  header and controls sit above the canvas */
+.wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+/* Info button */
+.open-button {
+    width: 2rem;
+    height: 2rem;
+    background-color: #1989d8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    z-index: 4;
+    font-family: 'oswald', system-ui;
+    font-size: 1rem;
+    color: white;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 2%;
+    bottom: auto;
+    right: 15px;
+    border-style: solid;
+    border-color: #8a79b7;
+    border-width: 3px;
+    border-radius: 8px;
+    max-width: 33rem;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    background-color: #ffad85;
+    z-index: 10;
+}
+
+.formTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formh2 h2 {
+    font-size: 1.5rem;
+}
+
+form p {
+    text-align: left;
+}
+
+.cancel {
+    width: 2rem;
+    height: 2rem;
+    background-color: #8a79b7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-family: 'oswald', system-ui;
+    font-size: 1rem;
+}
+
+/* Hover effects on buttons */
+.form-container .btn:hover,
+.open-button:hover {
+    opacity: 1;
+}
+
+/* Centre the heading */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 6rem;
+    /* space between */
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.subtitle {
+    font-family: 'oswald', system-ui;
+    font-size: 1.3rem;
+    letter-spacing: 0.15rem;
+    color: #5c4b89;
+    text-align: center;
+    margin: 0.2rem;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+/* Active buttons and reset button */
+
+/* Container for text and buttons */
+.controls {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.control-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+/* "Active buttons" text */
+.controls p {
+    font-family: 'oswald', system-ui;
+    font-size: 1.3rem;
+    color: #8a79b7;
+    margin: 0;
+}
+
+/* smaller helper lines */
+.controls p.small {
+    font-size: 1rem;
+}
+
+/* beats */
+.beat-info {
+    text-align: left;
+    position: fixed;
+    bottom: 2%;
+    left: 2%;
+    max-width: calc(100% - 14rem);
+    /* stops the chips running under the Reset button */
+}
+
+.beat-info p {
+    color: #8a79b7;
+    font-size: 1.4rem;
+}
+
+/* "none" and the active keys */
+#keys,
+#target,
+#bpm {
+    color: #1989d8;
+}
+
+#keys {
+    font-size: 1.3rem;
+}
+
+/* Active beats shown as small labels */
+.key-chip {
+    display: inline-block;
+    background-color: #8ec55e;
+    color: white;
+    padding: 0.4rem 0.9rem;
+    margin: 0.2rem;
+    border-radius: 20px;
+    font-family: 'oswald', system-ui;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.key-chip:hover {
+    background-color: white;
+    /* border-color: #c61f72; */
+    color: #8ec55e;
+}
+
+/* the beat the pots currently control */
+.key-chip.selected {
+    background-color: #ffde59;
+    /* border-color: #c61f72; */
+    color: #c61f72;
+}
+
+
+
+/*  Connect button */
+#connect {
+    background: #1989d8;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.35rem 0.8rem;
+    font-family: 'oswald', system-ui;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#connect:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Box around the Connect button and its status text */
+.connect-box {
+    position: relative;
+}
+
+/* connection status text sits right under the button without moving anything else */
+#status {
+    font-family: 'monserrat', system-ui;
+    font-size: 0.9rem;
+    color: #8a79b7;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.3rem;
+    max-width: 14rem;
+    text-align: left;
+}
+
+/* Green when connected, dark pink when the connection failed */
+#status.ok {
+    color: #3f7d1f;
+}
+
+#status.fail {
+    color: #c61f72;
+}
+
+/* Reset button */
+#reset {
+    background: linear-gradient(to right, #8a79b7, #1989d8, #c61f72);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.7rem 1.8rem;
+    font-family: 'oswald', system-ui;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    z-index: 10;
+}
+
+#reset:hover {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
+/* Dialog: ta bort beat */
+.confirm-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background-color: #ffad85;
+    border: 3px solid #8a79b7;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+}
+
+/* Temporary testing switch: remove this rule to show the confirmation popup again. */
+#removeDialog {
+    display: none !important;
+}
+
+.confirm-popup p {
+    font-family: 'oswald', system-ui;
+    font-size: 1.3rem;
+    color: #5c4b89;
+    margin: 0 0 1rem 0;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.confirm-buttons button {
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1.4rem;
+    font-family: 'oswald', system-ui;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+}
+
+#removeYes {
+    background: #c61f72;
+}
+
+#removeYes:hover {
+    color: #c61f72;
+    background: #ffde59;
+}
+
+#removeNo {
+    background: #8a79b7;
+}
+
+#removeNo:hover {
+    background: #ffde59;
+    color: #8a79b7;
+}
+
+/* This only applies when the window is 900px wide or narrower
+ In case the window is wider, the browser ignores this block completely */
+@media (max-width: 900px) {
+    .title {
+        top: 6rem;
+        /* pushes the title below the Control/Tempo text */
+    }
+
+    .header {
+        height: 10rem;
+        /* makes room for the title, since absolute elements take up no space */
+    }
+}

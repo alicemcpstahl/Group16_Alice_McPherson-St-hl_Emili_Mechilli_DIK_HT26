@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEANS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+
+      <div class="header">
+
+        <!--top left-->
+        <div class="controls">
+
+          <div class="connect-box">
+            <button id="connect" type="button">Connect Arduino</button>
+            <div id="status"></div>
+          </div>
+
+          <div class="control-info">
+
+            <p class="small">Control:
+              <span id="target"> Beats playing</span>
+            </p>
+            <p class="small">Tempo: <span id="bpm">150</span> BPM</p>
+          </div>
+          <!-- Reset knapp-->
+
+          <button id="reset" type="button">Reset</button>
+        </div>
+
+        <!--title-->
+        <div class="title">
+          <h1>Spill The B.E.A.N.S</h1>
+          <p class="subtitle">Make Your Own Music</p>
+
+        </div>
+
+      </div>
+    </header>
+
+
+    <div class="main">
+      <div class="visualsBox" id="visualsBox">
+        <!-- The animated circles are drawn here -->
+        <div id="generativeCanvas"></div>
+
+        <!-- <p>Press A S D F G H J K to turn beats on/off</p> -->
+        <div class="beat-info">
+          <p><b>BEATS:</b> <span id="keys">Choose your beat! </span></p>
+        </div>
+
+        <!-- Controls: active beats, chosen beat, tempo, Arduino -->
+      </div>
+      <div class="whyBean">
+        <button class="open-button" onclick="openForm()">i</button>
+
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <div class="formTop">
+
+              <div class="formh2">
+                <h2>Please, allow us to brag!</h2>
+              </div>
+
+              <div class="formX">
+                <button type="button" class="btn cancel" onclick="closeForm()">X</button>
+              </div>
+
+            </div>
+            <p>Every
+              component is handmade with not love but pain, suffering, anger, confusion and a now huge ego hehe.
+              <br><br>
+              The so called BEANS are connected to the computer via an Arduino DUE R3-E running a C++ script. BEAN
+              ONE contains eight buttons and two potentiometers soldered to a perfboard. BEAN TWO is made up of membrane
+              switches, recycled from a charity shopbought bathroom floormat.
+              <br><br>
+              All containers, button caps, pot caps and
+              the like have been 3D modelled in Onshape and then printed.
+              <br><br>
+              We have decided to call our collection of lights, <i>Trailer Trash Electronics</i>.
+              <br>
+              Bumfights is an assortment of LEDs soldered to
+              a perfboard and connected to an Arduino R4 Minima, also running a C++ script, chocking, we know.
+              <br>
+              Crackhead, as you can see, is our most handmade looking item. Standing proudly on a pandora box with it's
+              old IKEA desk lamp light and snusdosa lid stuck to a motor taken from a game controller with it's weights
+              ripped off.
+            </p>
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Dialog: ta bort beat -->
+    <div class="confirm-popup" id="removeDialog">
+      <p id="removeText"></p>
+      <div class="confirm-buttons">
+        <button type="button" id="removeYes">Remove</button>
+        <button type="button" id="removeNo">Cancel</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer"></div>
+    </footer>
+  </div>
+
+  <!-- p5.js must load BEFORE the sketch -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <!-- audio.js must come before script.js -->
+  <script src="audio.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
